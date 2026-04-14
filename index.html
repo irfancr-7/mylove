@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will you be mine? 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url("background.jpg") no-repeat center/cover fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.container {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    max-width: 420px;
+    width: 100%;
+}
+
+.love-text {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2rem, 6vw, 2.5rem);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.yes-btn { background: #00ff9d; }
+.no-btn { background: #ff4d4d; }
+
+video {
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <p class="love-text">Will you be mine? 💖</p>
+
+    <button class="yes-btn" onclick="playVideo('yes')">Yes 💕</button>
+    <button class="no-btn" onclick="playVideo('no')">No 💔</button>
+
+    <div id="videoBox"></div>
+</div>
+
+<script>
+
+function playVideo(type) {
+    const box = document.getElementById("videoBox");
+
+    if (type === "yes") {
+        box.innerHTML = `
+            <h3>You just made me the happiest person alive 💖</h3>
+            <video id="videoPlayer" src="yesvideo.mp4" controls></video>
+        `;
+    } else {
+        box.innerHTML = `
+            <h3>Still, you’ll always be special to me 🙂</h3>
+            <video id="videoPlayer" src="novideo.mp4" controls></video>
+        `;
+    }
+
+    const vid = document.getElementById("videoPlayer");
+
+    // play video with sound
+    setTimeout(() => {
+        vid.currentTime = 0;
+        vid.play();
+    }, 200);
+
+    // 🔥 IMPORTANT FIX (reliable)
+    vid.addEventListener("ended", function () {
+        if (type === "yes") {
+            shareWhatsAppYes();
+        } else {
+            shareWhatsAppNo();
+        }
+    });
+}
+
+/* YES message */
+function shareWhatsAppYes() {
+    const msg = encodeURIComponent("Hey ❤️ I said YES to you 😍💖");
+    window.open("https://wa.me/917305454004?text=" + msg, "_blank");
+}
+
+/* NO message */
+function shareWhatsAppNo() {
+    const msg = encodeURIComponent("Sorry 😔 but I can't accept... still you're special 🙂");
+    window.open("https://wa.me/917305454004?text=" + msg, "_blank");
+}
+
+</script>
+
+</body>
+</html>
